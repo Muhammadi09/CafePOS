@@ -17,9 +17,16 @@ namespace CafePOS
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void addProductBtn_Click(object sender, EventArgs e)
         {
+            var addProductsForm = new AddProductsForm();
+            addProductsForm.Show();
+        }
 
+        private void listProductsBtn_Click(object sender, EventArgs e)
+        {
+            var listProductForm = new ListProductForm();
+            listProductForm.Show();
         }
     }
 }
