@@ -16,12 +16,13 @@ namespace CafePOS
     {
         private BindingList<Product> products = new BindingList<Product>();
         private List<string> categories = new List<string>();
-        private double price = 0;
+        private double price;
+        private double currentPrice;
         public TillForm()
         {
             InitializeComponent();
             productsListBox.DataSource = products;
-            productsListBox.DisplayMember = "Description";
+            //productsListBox.DisplayMember = "Description";
             CreateCategoryTabs();
             CreateProductButtons();
             
@@ -80,37 +81,46 @@ namespace CafePOS
             UpdateProductInfoBox(p);
             products.Add(p);
             productsListBox.SelectedIndex = productsListBox.Items.Count - 1;
-            price += p.Price;
-            totalPriceBox.Text = price.ToString();
-            
-            
+            UpdatePriceTotal(p);
 
         }
+
+        private void UpdatePriceTotal(Product product)
+        {
+           
+            price += product.Price;
+            totalPriceBox.Text = String.Format("{0:c}", price);
+        }
+
         private void UpdateProductInfoBox(Product product)
         {
             productInfoBox.Text = product.Name + " " + product.Price.ToString();
         }
-        /*private void button1_Click(object sender, EventArgs e)
-        {
-            Product product = new Product("Latte", "Coffee", 1.99);
-            products.Add(product);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Product product = new Product("Espresso", "Coffee", 1.50);
-            products.Add(product);
-        }*/
-
+        
         private void productsListBox_Format(object sender, ListControlConvertEventArgs e)
         {
             string currentDescription = ((Product)e.ListItem).Name;
             string currentPrice = String.Format("{0:c}", ((Product)e.ListItem).Price);
             string currentDescriptionPadded = currentDescription.PadRight(20);
-
+            this.currentPrice = ((Product)e.ListItem).Price;
             e.Value = currentDescriptionPadded + currentPrice;
+            
         }
 
-        
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            if (products.Count > 0)
+            {
+                price -= currentPrice;
+                totalPriceBox.Text = String.Format("{0:c}", price);
+                products.Remove((Product)productsListBox.SelectedItem);
+                productInfoBox.Text = null;
+
+            }
+
+
+
+
+        }
     }
 }

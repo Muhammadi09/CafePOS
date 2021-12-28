@@ -37,6 +37,7 @@ namespace CafePOS
             this.deleteBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.totalPriceBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -98,6 +99,7 @@ namespace CafePOS
             this.deleteBtn.TabIndex = 7;
             this.deleteBtn.Text = "Delete Item";
             this.deleteBtn.UseVisualStyleBackColor = false;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // cancelBtn
             // 
@@ -112,18 +114,28 @@ namespace CafePOS
             // 
             // totalPriceBox
             // 
-            this.totalPriceBox.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.totalPriceBox.Location = new System.Drawing.Point(570, 394);
+            this.totalPriceBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.totalPriceBox.Location = new System.Drawing.Point(756, 393);
             this.totalPriceBox.Name = "totalPriceBox";
-            this.totalPriceBox.Size = new System.Drawing.Size(171, 27);
+            this.totalPriceBox.Size = new System.Drawing.Size(124, 29);
             this.totalPriceBox.TabIndex = 9;
-
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(646, 396);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 21);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Total to pay:";
             // 
             // TillForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(915, 504);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.totalPriceBox);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.deleteBtn);
@@ -151,5 +163,6 @@ namespace CafePOS
         private System.Windows.Forms.Button deleteBtn;
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.TextBox totalPriceBox;
+        private System.Windows.Forms.Label label2;
     }
 }
