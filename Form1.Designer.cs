@@ -71,6 +71,7 @@ namespace CafePOS
             this.tillBtn.TabIndex = 2;
             this.tillBtn.Text = "Till";
             this.tillBtn.UseVisualStyleBackColor = true;
+            this.tillBtn.Click += new System.EventHandler(this.tillBtn_Click);
             // 
             // salesBtn
             // 

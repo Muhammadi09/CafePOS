@@ -8,18 +8,23 @@ namespace CafePOS
 {
     public class Product
     {
-
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }
         public double Price { get; set; }
+        public string Description { get; set; }
 
-        public Product(int id, string name, string category, double price)
+        public Product(string name, string category, double price)
         {
-            Id = id;
             Name = name;
             Category = category;
             Price = price;
+            SetDescription();
         }
+
+        private void SetDescription()
+        {
+            this.Description = $"{Name}, {Price}";
+        }
+
     }
 }

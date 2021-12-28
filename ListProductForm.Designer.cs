@@ -108,6 +108,8 @@ namespace CafePOS
             this.Controls.Add(this.addProductBtn);
             this.Controls.Add(this.deleteProductBtn);
             this.Controls.Add(this.productListDataView);
+            this.MaximumSize = new System.Drawing.Size(816, 489);
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "ListProductForm";
             this.Text = "ListProductForm";
             this.Load += new System.EventHandler(this.ListProductForm_Load);
