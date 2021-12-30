@@ -59,7 +59,6 @@ namespace CafePOS
             this.productsListBox.Name = "productsListBox";
             this.productsListBox.Size = new System.Drawing.Size(310, 319);
             this.productsListBox.TabIndex = 1;
-            this.productsListBox.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.productsListBox_Format);
             // 
             // categoryPanel
             // 
@@ -82,12 +81,13 @@ namespace CafePOS
             // 
             this.payBtn.BackColor = System.Drawing.Color.SpringGreen;
             this.payBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.payBtn.Location = new System.Drawing.Point(39, 439);
+            this.payBtn.Location = new System.Drawing.Point(39, 429);
             this.payBtn.Name = "payBtn";
-            this.payBtn.Size = new System.Drawing.Size(110, 40);
+            this.payBtn.Size = new System.Drawing.Size(512, 50);
             this.payBtn.TabIndex = 6;
             this.payBtn.Text = "Pay";
             this.payBtn.UseVisualStyleBackColor = false;
+            this.payBtn.Click += new System.EventHandler(this.payBtn_Click);
             // 
             // deleteBtn
             // 
@@ -111,6 +111,7 @@ namespace CafePOS
             this.cancelBtn.TabIndex = 8;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = false;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // totalPriceBox
             // 

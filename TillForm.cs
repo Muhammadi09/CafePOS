@@ -14,18 +14,17 @@ namespace CafePOS
     
     public partial class TillForm : Form
     {
-        private BindingList<Product> products = new BindingList<Product>();
+        //private BindingList<Product> products = new BindingList<Product>();
         private List<string> categories = new List<string>();
         private double price;
-        private double currentPrice;
+
         public TillForm()
         {
             InitializeComponent();
-            productsListBox.DataSource = products;
-            //productsListBox.DisplayMember = "Description";
+            productsListBox.DataSource = TillProducts.products;
+            productsListBox.DisplayMember = "Description";
             CreateCategoryTabs();
             CreateProductButtons();
-            
         }
 
         private void CreateCategoryTabs()
@@ -79,7 +78,7 @@ namespace CafePOS
             Button b = (Button)sender;
             Product p = (Product)b.Tag;
             UpdateProductInfoBox(p);
-            products.Add(p);
+            TillProducts.products.Add(p);
             productsListBox.SelectedIndex = productsListBox.Items.Count - 1;
             UpdatePriceTotal(p);
 
@@ -97,30 +96,49 @@ namespace CafePOS
             productInfoBox.Text = product.Name + " " + product.Price.ToString();
         }
         
-        private void productsListBox_Format(object sender, ListControlConvertEventArgs e)
-        {
-            string currentDescription = ((Product)e.ListItem).Name;
-            string currentPrice = String.Format("{0:c}", ((Product)e.ListItem).Price);
-            string currentDescriptionPadded = currentDescription.PadRight(20);
-            this.currentPrice = ((Product)e.ListItem).Price;
-            e.Value = currentDescriptionPadded + currentPrice;
-            
-        }
-
+      
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            if (products.Count > 0)
+
+            double price = 0;
+            foreach (var item in TillProducts.products)
             {
-                price -= currentPrice;
-                totalPriceBox.Text = String.Format("{0:c}", price);
-                products.Remove((Product)productsListBox.SelectedItem);
+                if (item.Description.Equals(productsListBox.Text))
+                {
+                    price = item.Price;
+                }
+            }
+            if(TillProducts.products.Count > 0)
+            {
+                this.price -= price;
+                totalPriceBox.Text = String.Format("{0:c}", this.price);
+                TillProducts.products.Remove((Product)productsListBox.SelectedItem);
                 productInfoBox.Text = null;
+            }
+        }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void payBtn_Click(object sender, EventArgs e)
+        {
+            
+            
+            if (TillProducts.products.Count > 0)
+            {
+                double totalPrice = Convert.ToDouble(totalPriceBox.Text.TrimStart('£'));
+                Payment.UpdatePrice(totalPrice);
+                PaymentDialog paymentDialog = new PaymentDialog();
+                paymentDialog.ShowDialog();
 
             }
-
-
-
-
+            else
+            {
+                MessageBox.Show("No items added");
+            }
+            
         }
     }
 }

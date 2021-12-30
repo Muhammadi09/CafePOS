@@ -81,5 +81,33 @@ namespace CafePOS
             }
             con.Close();
         }
+
+        public static void SaveToTransaction(string products, double totalPrice, string date)
+        {
+            MySqlConnection connection = GetConnection();
+            string sqlInsert = "insert into Transactions(products,total_price,date_today) values('" + products + "','" + totalPrice + "','" + date + "');";
+            MySqlCommand cmd = new MySqlCommand(sqlInsert, connection);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Transaction saved");
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Error: transaction save failed.");
+            }
+            connection.Close();
+        }
+        public static DataTable GetAllTransactions(DataTable dataTable)
+        {
+            string sql = "server=localhost;uid=root;pwd=Umar2;database=cafepos;convert zero datetime=True";
+            MySqlConnection con = new MySqlConnection(sql);
+            con.Open();
+            MySqlCommand cmd = new MySqlCommand("SELECT transactions.products AS Products_sold, transactions.total_price AS Total_price, transactions.date_today AS Date FROM transactions", con);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            dataTable.Load(reader);
+
+            return dataTable;
+        }
     }
 }

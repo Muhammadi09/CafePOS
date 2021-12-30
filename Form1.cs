@@ -34,5 +34,11 @@ namespace CafePOS
             var tillForm = new TillForm();
             tillForm.Show();
         }
+
+        private void salesBtn_Click(object sender, EventArgs e)
+        {
+            var salesForm = new SalesForm();
+            salesForm.Show();
+        }
     }
 }

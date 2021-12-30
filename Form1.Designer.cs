@@ -84,6 +84,7 @@ namespace CafePOS
             this.salesBtn.TabIndex = 3;
             this.salesBtn.Text = "Sales";
             this.salesBtn.UseVisualStyleBackColor = true;
+            this.salesBtn.Click += new System.EventHandler(this.salesBtn_Click);
             // 
             // listProductsBtn
             // 

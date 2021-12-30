@@ -23,7 +23,7 @@ namespace CafePOS
 
         private void SetDescription()
         {
-            this.Description = $"{Name}, {Price}";
+            this.Description = $"{Name.PadRight(20)} {String.Format("{0:0.00}",Price)}";
         }
 
     }
